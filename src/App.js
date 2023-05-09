@@ -18,7 +18,16 @@ function App() {
   }, []);
 
   const searchByBreed = () => {
-    // TODO
+    setIsLoading(true);
+    fetch(`https://dog.ceo/api/breed/${selectedBreed}/images`)
+      .then((response) => response.json())
+      .then((data) => {
+        const dogImages = data.message;
+        setDogImages(dogImages);
+        setIsLoading(false);
+      })
+      .catch((error) => console.error(error));
+    setIsLoading(false);
   };
 
   return (
